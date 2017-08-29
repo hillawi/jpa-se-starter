@@ -2,3 +2,5 @@
 *.jar
 *.iml
 .idea/*
+target
+dependency-reduced-pom.xml
