@@ -22,7 +22,7 @@
         <properties>
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:oracle:thin:hillawi/kassala@localhost:1521:myDB"/>
+                      value="jdbc:oracle:thin:hillawi/{PASS_WORD}@localhost:1521:myDB"/>
 
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
