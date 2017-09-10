@@ -15,7 +15,7 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @TableGenerator(name = "PRODUCT_GEN", table = "PRODUCT_ID_GEN", pkColumnName = "ID", valueColumnName = "VAL")
+    @TableGenerator(name = "PRODUCT_GEN", table = "ID_GENERATOR", pkColumnValue = "PRODUCT", pkColumnName = "ID", valueColumnName = "VAL")
     @GeneratedValue(generator = "PRODUCT_GEN")
     @Column(name = "PRODUCT_ID")
     private long id;
@@ -63,10 +63,7 @@ public class Product implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Product)) {
-            return false;
-        }
-        return id == ((Product) obj).id && id != 0;
+        return obj instanceof Product && id == ((Product) obj).id && id != 0;
     }
 
     @Override

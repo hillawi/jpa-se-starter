@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -15,8 +16,8 @@ public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    //@TableGenerator(name = "CUSTOMER_GEN", table = "CUSTOMER_ID_GEN", pkColumnName = "ID", valueColumnName = "VAL")
-    @SequenceGenerator(name = "CUSTOMER_GEN", sequenceName = "CUSTOMER_SEQUENCE")
+    @TableGenerator(name = "CUSTOMER_GEN", table = "ID_GENERATOR", pkColumnValue = "CUSTOMER", pkColumnName = "ID", valueColumnName = "VAL")
+    //@SequenceGenerator(name = "CUSTOMER_GEN", sequenceName = "CUSTOMER_SEQUENCE")
     @GeneratedValue(generator = "CUSTOMER_GEN")
     @Column(name = "CUSTOMER_ID")
     private long id;
@@ -31,6 +32,9 @@ public class Customer implements Serializable {
     private Gender gender;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Order> orders;
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "ADDRESS", joinColumns = @JoinColumn(name = "CUSTOMER_ID"))
+    private Collection<Address> addresses;
 
     public Customer() {
     }
@@ -97,6 +101,14 @@ public class Customer implements Serializable {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public Collection<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Collection<Address> addresses) {
+        this.addresses = addresses;
     }
 
     @Override

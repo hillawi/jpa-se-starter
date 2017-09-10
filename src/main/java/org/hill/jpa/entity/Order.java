@@ -15,7 +15,7 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @TableGenerator(name = "ORDER_GEN", table = "ORDER_ID_GEN", pkColumnName = "ID", valueColumnName = "VAL")
+    @TableGenerator(name = "ORDER_GEN", table = "ID_GENERATOR", pkColumnValue = "ORDER", pkColumnName = "ID", valueColumnName = "VAL")
     @GeneratedValue(generator = "ORDER_GEN")
     @Column(name = "ORDER_ID")
     private long id;

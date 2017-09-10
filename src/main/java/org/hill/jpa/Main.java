@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,9 +26,13 @@ public class Main {
         int puIdx = ArrayUtils.indexOf(PERSISTENCE_UNITS, args[0]);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNITS[puIdx]);
         EntityManager em = emf.createEntityManager();
+
         em.getTransaction().begin();
-        em.persist(getCustomer("Ahmed", "Hillawi", "Hill", LocalDate.of(1983, 7, 11), Gender.MALE));
-        em.persist(getCustomer("Dalal", "Hillawi", "Dalo", LocalDate.of(1987, 12, 16), Gender.FEMALE));
+        Customer customer = getCustomer("Ahmed", "Hillawi", "Hill", LocalDate.of(1983, 7, 11), Gender.MALE);
+        Address address1 = new Address("Belgium", "Brussels", "Uccle", "Rue de Stalle", 162);
+        Address address2 = new Address("Belgium", "Brussels", "Ville de Bruxelles", "Rue de la Croix de Fer", 68);
+        customer.setAddresses(Arrays.asList(address1, address2));
+        em.persist(customer);
         em.getTransaction().commit();
 
         TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c", Customer.class);

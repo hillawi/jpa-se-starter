@@ -6,7 +6,7 @@ import java.util.Set;
 @Entity
 public class Author {
     @Id
-    @TableGenerator(name = "AUTHOR_GEN", table = "AUTHOR_ID_GEN", pkColumnName = "ID", valueColumnName = "VAL")
+    @TableGenerator(name = "AUTHOR_GEN", table = "ID_GENERATOR", pkColumnValue = "AUTHOR", pkColumnName = "ID", valueColumnName = "VAL")
     @GeneratedValue(generator = "AUTHOR_GEN")
     @Column(name = "AUTHOR_ID")
     private long id;
